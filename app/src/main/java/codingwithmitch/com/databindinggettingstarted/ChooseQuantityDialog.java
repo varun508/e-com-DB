@@ -34,7 +34,11 @@ public class ChooseQuantityDialog extends DialogFragment {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Log.d(TAG, "onItemSelected: selected: " + adapterView.getItemAtPosition(i));
-
+            IMainActivity iMainActivity = (IMainActivity) getActivity();
+            if (iMainActivity != null)
+                iMainActivity.setQuantity(Integer.parseInt((String) adapterView.getItemAtPosition(i)));
+            else
+                Log.d(TAG, "iMainActivity is null");
             getDialog().dismiss();
         }
     };

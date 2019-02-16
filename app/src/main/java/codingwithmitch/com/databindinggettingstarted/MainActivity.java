@@ -8,7 +8,7 @@ import codingwithmitch.com.databindinggettingstarted.databinding.ActivityMainBin
 import codingwithmitch.com.databindinggettingstarted.models.Product;
 import codingwithmitch.com.databindinggettingstarted.util.Products;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainActivity {
 
     // Data binding
     private ActivityMainBinding mBinding;
@@ -22,5 +22,18 @@ public class MainActivity extends AppCompatActivity {
         Products products = new Products();
         mProduct = products.PRODUCTS[1];
         mBinding.setProduct(mProduct);
+        mBinding.setQuantity(1);
+        mBinding.setIMainActivity(this);
+    }
+
+    @Override
+    public void inflateQuantityDialog() {
+        ChooseQuantityDialog dialog = new ChooseQuantityDialog();
+        dialog.show(getSupportFragmentManager(), getString(R.string.dialog_choose_quantity));
+    }
+
+    @Override
+    public void setQuantity(int quantity) {
+        mBinding.setQuantity(quantity);
     }
 }

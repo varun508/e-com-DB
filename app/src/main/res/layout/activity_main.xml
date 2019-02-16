@@ -17,6 +17,10 @@
         <variable
             name="quantity"
             type="int" />
+
+        <variable
+            name="iMainActivity"
+            type="codingwithmitch.com.databindinggettingstarted.IMainActivity" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -132,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/grey_rounded_button"
+                android:onClick="@{() -> iMainActivity.inflateQuantityDialog()}"
                 android:padding="10dp">
 
 

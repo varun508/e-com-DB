@@ -2,6 +2,23 @@
 
 <layout>
 
+    <data>
+
+        <import type="codingwithmitch.com.databindinggettingstarted.util.StringUtil" />
+
+        <import type="codingwithmitch.com.databindinggettingstarted.util.BigDecimalUtil" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="product"
+            type="codingwithmitch.com.databindinggettingstarted.models.Product" />
+
+        <variable
+            name="quantity"
+            type="int" />
+    </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +46,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text=""
+                    android:text="@{StringUtil.convertIntToString(product.num_ratings)}"
                     android:textColor="@color/DarkGrey"
                     android:textSize="10sp" />
 
@@ -44,7 +61,7 @@
                     android:layout_toLeftOf="@+id/num_ratings"
                     android:isIndicator="true"
                     android:numStars="5"
-                    android:rating="4"
+                    android:rating="@{product.rating.floatValue()}"
                     android:scaleX="1.2"
                     android:scaleY="1.2"
                     android:theme="@style/RatingBar" />
@@ -56,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text=""
+                android:text="@{product.title}"
                 android:textColor="@color/Black"
                 android:textSize="14sp" />
 
@@ -91,7 +108,7 @@
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="@{product.hasSalePrice()? BigDecimalUtil.getValue(product.sale_price) : BigDecimalUtil.getValue(product.price)}"
                     android:textColor="@color/red2"
                     android:textSize="16sp" />
 
@@ -102,9 +119,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/strike_through"
-                    android:text=""
+                    android:text="@{BigDecimalUtil.getValue(product.price)}"
                     android:textColor="@color/DarkGrey"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:visibility="@{product.hasSalePrice()? View.VISIBLE: View.GONE}" />
 
             </LinearLayout>
 
@@ -121,7 +139,7 @@
                     android:id="@+id/quantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="@{StringUtil.getQuantityString(quantity)}"
                     android:textColor="@color/Black"
                     android:textSize="12sp" />
 
